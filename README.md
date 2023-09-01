@@ -72,10 +72,6 @@ Consulta: https://webhook.site/#!/CHANGE_HERE
 Envio: https://webhook.site/CHANGE_HERE
 ```
 
-## TODO 
-
-- [Configurations read env vars](https://docs.nestjs.com/techniques/configuration)
-
 ## Docker
 
 ```bash
