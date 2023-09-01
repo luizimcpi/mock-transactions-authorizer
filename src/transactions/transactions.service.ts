@@ -7,6 +7,7 @@ import { lastValueFrom } from 'rxjs';
 @Injectable()
 export class TransactionsService {
   private readonly logger = new Logger(TransactionsService.name);
+  private readonly WEBHOOK_API_URL = process.env.WEBHOOK_API_URL;
   constructor(private readonly httpService: HttpService) {}
 
   async create(): Promise<boolean> {
@@ -26,7 +27,7 @@ export class TransactionsService {
   }
 
   async sendToWebhook(data: CreateTransactionDto): Promise<boolean> {
-    const url = 'https://webhook.site/14da156a-cfbb-4f00-84e1-57d6e682b14c';
+    const url = this.WEBHOOK_API_URL;
     const config = {
       headers: {
         'Content-Type': 'Application/json',

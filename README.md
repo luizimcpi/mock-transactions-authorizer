@@ -54,6 +54,12 @@ npm install --save-dev @types/cron
 npm install --save uuid
 ```
 
+### Install NestJS Config to read env vars
+```
+npm i --save @nestjs/config
+```
+
+
 ## Resources
 
 ```
@@ -74,5 +80,5 @@ Envio: https://webhook.site/CHANGE_HERE
 
 ```bash
 $ docker build -t luizimcpi/mock-transactions-authorizer .
-$ docker run -p 3000:3000 luizimcpi/mock-transactions-authorizer
+$ docker run --name transactions-app -d -p 3000:3000 --restart always --env WEBHOOK_API_URL=https://webhook.site/bd5fa43a-a345-4ab0-8d3d-c8021258520c luizimcpi/mock-transactions-authorizer:latest
 ```
