@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TransactionsService } from './transactions.service';
 import { HttpService } from '@nestjs/axios';
 import { of } from 'rxjs';
+import { AxiosResponse } from 'axios';
 
 describe('TransactionsService', () => {
   let service: TransactionsService;
@@ -31,17 +32,19 @@ describe('TransactionsService', () => {
 
   describe('create', () => {
     it('should create a random transaction with success', async () => {
+      const data = ['true'];
+      const response: AxiosResponse<any> = {
+        data,
+        headers: {},
+        config: {
+          headers: undefined,
+        },
+        status: 200,
+        statusText: 'OK',
+      };
       jest
         .spyOn(httpService, 'post')
-        .mockReturnValueOnce(
-          of({
-            status: 200,
-            statusText: 'OK',
-            config: {},
-            headers: {},
-            data: '',
-          }),
-        );
+        .mockImplementationOnce(() => of(response));
       const result = await service.create();
       expect(result).toBeTruthy();
       expect(httpService.post).toBeCalledTimes(1);

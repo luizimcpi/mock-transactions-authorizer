@@ -10,18 +10,23 @@ export class TransactionsService {
   constructor(private readonly httpService: HttpService) {}
 
   async create(): Promise<boolean> {
+    const randomAmount = Math.floor(Math.random() * 6) + 100;
     const transaction: CreateTransactionDto = {
       id: uuidv4(),
       client_document: uuidv4(),
-      amount: 1000,
-      type: 'CREDIT',
+      amount: randomAmount,
+      type: randomAmount % 2 == 0 ? 'CREDIT' : 'DEBIT',
       created_at: new Date(),
     };
     this.logger.debug(
       `Calling bank service with transactionId : ${transaction.id}`,
     );
 
-    const url = 'https://webhook.site/e7648810-8661-47af-8b64-cff6e4b0e630';
+    return this.sendToWebhook(transaction);
+  }
+
+  async sendToWebhook(data: CreateTransactionDto): Promise<boolean> {
+    const url = 'https://webhook.site/14da156a-cfbb-4f00-84e1-57d6e682b14c';
     const config = {
       headers: {
         'Content-Type': 'Application/json',
@@ -29,7 +34,7 @@ export class TransactionsService {
     };
 
     const response = await lastValueFrom(
-      this.httpService.post(url, transaction, config),
+      this.httpService.post(url, data, config),
     );
 
     return response.status == HttpStatus.OK;

@@ -61,8 +61,9 @@ nest g resource transactions
 ```
 
 ```
-Consulta: https://webhook.site/#!/e7648810-8661-47af-8b64-cff6e4b0e630
-Envio: https://webhook.site/e7648810-8661-47af-8b64-cff6e4b0e630
+Exemplos:
+Consulta: https://webhook.site/#!/CHANGE_HERE
+Envio: https://webhook.site/CHANGE_HERE
 ```
 
 ## TODO 
